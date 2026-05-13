@@ -43,5 +43,15 @@ services:
       - db
       - redis
 
+  bot:
+    build: ./backend
+    command: python -m bot.bot
+    env_file:
+      - .env
+    depends_on:
+      - backend
+      - db
+      - redis
+
 volumes:
   postgres_data:
