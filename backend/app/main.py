@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.database import engine, Base
 from app.api.tasks import router as tasks_router
+from app.api.websocket import router as websocket_router
 
 app = FastAPI(title="Omni Task Manager", version="1.0.0")
 
@@ -21,6 +22,7 @@ async def startup():
 
 # Routers
 app.include_router(tasks_router)
+app.include_router(websocket_router)
 
 @app.get("/")
 async def root():
