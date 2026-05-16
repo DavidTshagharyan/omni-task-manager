@@ -5,8 +5,7 @@ celery_app = Celery(
     "worker",
     broker=settings.REDIS_URL,
     backend=settings.REDIS_URL,
+    include=["worker.tasks"]
 )
 
-celery_app.conf.task_routes = {
-    "worker.tasks.*": {"queue": "main-queue"}
-}
+celery_app.conf.broker_connection_retry_on_startup = True
